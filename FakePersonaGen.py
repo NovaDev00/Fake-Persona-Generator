@@ -1,11 +1,16 @@
 import argparse as parse
+from prettytable import PrettyTable 
 import random
+import textStyle
 
+
+#inisialize
+color = textStyle.TextColor
 
 # Declare Variables
 version='0.1.0'
 commands="-v --version : tool version\n-c --commands : show all commands\n-g --gender : choose puppet gender\n-cc --character : generate just character info(name, age, birthday, etc)\n-n --number : number of the puppets\n-a --all : generate all info\n-o --online : generate online info (email, username, password, IPV4, mac adress, etc)\n-b --bankinfo : generate bank information"
-rgender = None #returned gender
+name = surename = mothername = rgender = age = birthday = zodiac  = nationality = geo_coordinates = statue = accupation = company = salary = major = mastercard = expired = cvc2 = username = email = phone = password = ipv4 = mac_adress = eye_color = hair = height = weight = bloodtype = fav_color = fav_food = fav_drink = fav_film = fav_sport = fav_music = hobies = interestes = viechle = None 
 
 # Create an ArgumentParser object
 parser = parse.ArgumentParser(description=" Generate a Fake Persona for SUCK PUPPET")
@@ -27,8 +32,12 @@ args = parser.parse_args()
 # Generating Functions
 # name
 def name_gen(gender = 3): # generate puppet name
-
 	global rgender
+	global name 
+	global surename 
+	global mothername
+	global nationality
+
 	male_name = ['Alexander', 'Dax', 'Victor', 'Jordan', 'Colt', 'Frank', 'Sawyer', 'Nolan', 'Ridge', 'Carter', 'Donald', 'Anthony', 'Ryan', 'Hunter', 'Travis', 'Sebastian', 'Beau', 'Peter', 'Omar', 'Owen', 'Miguel', 'James', 'Grant', 'Parker', 'Oscar', 'Harry', 'Nash', 'Caleb', 'Christopher', 'Paxton', 'Emmett', 'Brooks', 'Garrett', 'Blake', 'Xavier', 'Samuel', 'Philip', 'Jason', 'Kevin', 'Liam', 'Mark', 'Theodore', 'Remington', 'Nathaniel', 'River', 'Miles', 'Ezekiel', 'Corey', 'Max', 'Vincent', 'Carl', 'Preston', 'Craig', 'Luke', 'Michael', 'David', 'Jackson', 'Derek', 'Dominic', 'Jake', 'Hudson', 'Timothy', 'Keegan', 'Mason', 'Calvin', 'Steven', 'Ian', 'Richard', 'Wyatt', 'Adrian', 'Todd', 'Ronald', 'Neil', 'Oliver', 'Walter', 'Julian', 'Colin', 'Ford', 'Orion', 'Kai', 'Gabriel', 'Emerson', 'Gregory', 'Francis', 'Elliot', 'Harrison', 'Warren', 'Knox', 'Leonard', 'Martin', 'Lincoln', 'Jessie', 'Gary', 'Cameron', 'Thomas', 'Sam', 'Gavin', 'Alex', 'Wesley', 'Isaac', 'Aiden', 'Fernando', 'Zachary', 'Keith', 'Rhett', 'Trevor', 'Joshua', 'Robert', 'Roger', 'Ethan', 'Matt', 'Graham', 'Mitchell', 'Boris', 'Paul', 'Monroe', 'Alan', 'Matthew', 'Marcus', 'George', 'Phil', 'Everett', 'Declan', 'Beckett', 'Joe', 'Wilder', 'Elijah', 'Logan', 'Brent', 'Earl', 'Jonathan', 'Cash', 'Kenneth', 'Ellis', 'Jesse', 'Henry', 'William', 'Lucas', 'Stephen', 'Maverick', 'Jace', 'Gordon', 'Deacon', 'Dylan', 'Tim', 'Isaiah', 'Harold', 'Archer', 'Adam', 'Nicholas', 'Taylor', 'Stewart', 'Landon', 'Devin', 'Rafael', 'Dan', 'Joseph', 'Sean', 'Grayson', 'Brandon', 'Simon', 'Bronson', 'Jeremy', 'Brian', 'Evan', 'Jared', 'Jack', 'Cody', 'Fletcher', 'Ricky', 'Weston', 'Kingsley', 'Raymond', 'Piers', 'Edward', 'Joel', 'Zane', 'Noah', 'Phoenix', 'Charles', 'Bradley', 'Eric', 'Marshall', 'Finley', 'Seth', 'John', 'Nathan', 'Quentin', 'Patrick', 'Shawn', 'Kyle', 'Sullivan', 'Rowan', 'Finn', 'Asher', 'Benjamin', 'Connor', 'Justin', 'Daniel', 'Andrew', 'Christian', 'Jacob', 'Tyler', 'Thatcher', 'Austin', 'Jasper', 'Silas']	
 	female_name = ['Victoria', 'Carol', 'Sophie', 'Elizabeth', 'Maria', 'Paisley', 'Sutton', 'Sue', 'Dakota', 'Lillian', 'Felicity', 'Madison', 'Anna', 'Stephanie', 'Megan', 'Emily', 'Emery', 'Rose', 'Cassandra', 'Courtney', 'Leah', 'Arden', 'Remi', 'Daisy', 'Alexandra', 'Mary', 'Angela', 'Caitlin', 'Nancy', 'Nicola', 'Nicole', 'Lisa', 'Pippa', 'Finley', 'Denise', 'Rachel', 'Bethany', 'Katherine', 'Aria', 'Sarah', 'Diana', 'Cora', 'Kayla', 'Ava', 'Laura', 'Donna', 'Zadie', 'Emma', 'Sandra', 'Jennifer', 'Juniper', 'Carolyn', 'Cecilia', 'Wendy', 'Bryn', 'Jasmine', 'Ruth', 'Diane', 'Kennedy', 'Christina', 'Grace', 'Everly', 'Briar', 'Carla', 'Riley', 'Blair', 'Clementine', 'Deborah', 'Deirdre', 'Irene', 'Addison', 'Cheyenne', 'Theresa', 'Jamie', 'Cynthia', 'Jessica', 'Sofia', 'Vanessa', 'Barbara', 'Christine', 'Charlotte', 'Danielle', 'Zoe', 'Luna', 'Wren', 'Susan', 'Isabella', 'Amelia', 'Stella', 'Joan', 'Olivia', 'Gabrielle', 'Natalie', 'Harlow', 'Dana', 'Karen', 'Linda', 'Lily', 'Abigail', 'Michelle', 'Julia', 'Alice', 'Amy', 'Sally', 'Haley', 'Hannah', 'Jane', 'Andrea', 'Sadie', 'Samantha', 'Joanne', 'Ashley', 'Madeleine', 'Angelina', 'Aurora', 'Yvonne', 'Nova', 'Lauren', 'Camille', 'Faith', 'Alison', 'Virginia', 'Jenna', 'Delaney', 'Penelope', 'Anne', 'Ella', 'Sloane', 'Allison', 'Bella', 'Caroline', 'Heather', 'Kimberly', 'Betty', 'Fiona', 'Brittany', 'Sonia', 'Claire', 'Bernadette', 'Margaret', 'Lennox', 'Alexis', 'Rebecca', 'Audrey', 'Brianna', 'Una', 'Oakley', 'Brenda', 'Ainsley', 'Jan', 'Zoey', 'Kinsley', 'Kylie', 'Avery', 'Wanda', 'Melanie', 'Tracey', 'Colleen', 'Patricia', 'Melissa', 'Quinn', 'Molly', 'Amanda', 'Crystal', 'Dorothy', 'Catherine', 'Chloe']
 
@@ -36,20 +45,25 @@ def name_gen(gender = 3): # generate puppet name
 	surename=sure_names_list[random.randint(0, len(sure_names_list)-1)]
 
 	nationality='American'
-	if gender == 1:  #genarate male name
+	if gender == 'm' or gender == 'male':  #genarate male name
 		rgender = 'male'
-		return male_name[random.randint(0,len(male_name)-1)] + ' ' +surename 
-	elif gender == 2: #generate female name
+		name = male_name[random.randint(0,len(male_name)-1)]
+	elif gender == 'f' or gender == 'female': #generate female name
 		rgender = 'female'
-		return female_name[random.randint(0,len(female_name)-1)] + ' ' + surename 
-	elif gender == 3:
+		name = female_name[random.randint(0,len(female_name)-1)]
+	elif gender == 'r' or gender == 'random': #generate
 		var=random.randint(0,1)
 		if var == 1: #generate random name
 			rgender = 'male'
-			return male_name[random.randint(0,len(male_name)-1)] + ' ' + surename 
+			name = male_name[random.randint(0,len(male_name)-1)]
 		else:
 			rgender = 'female'
-			return female_name[random.randint(0,len(female_name)-1)] + ' ' + surename 
+			name = female_name[random.randint(0,len(female_name)-1)]
+		
+	# generate nother name
+	mothername = female_name[random.randint(0,len(female_name)-1)]
+	while name == mothername:
+		mothername = female_name[random.randint(0,len(female_name)-1)]
 
 
 def age():
@@ -60,116 +74,71 @@ def age():
 	pass
 
 # email
-def email(name:str, surename:str):
-
+def email():
+	global username
+	global password
 	email = ['gmail', 'yahoo', 'yandex', 'outlook', 'hotmail', 'protonmail']
-	extention = ['com', 'ru']
-	#return (name + '.' + surename + '@' + email[random.randint(0, len(email)-1)] + '.' + extention[random.randint(0, len(extention)-1)]).lower()
+	extention = ['html', 'ru', 'com']
+	return str(name).lower() + '.' + str(surename).lower() + '@' + (email[random.randint(0, len(email)-1)]) + '.' + (extention[random.randint(0, len(extention)-1)])
 
+
+# Optional functions
+def charinfo(): # character information
+	print(f"{color.red}# Character information{color.end}")
+	table = PrettyTable([f"{color.soft_blue}NAME", "SURENAME", "MOTHER NAME", f"NATIONALITY{color.end}"])
+
+	for i in range(args.number):
+		name_gen(args.gender)
+		table.add_row([name, surename, mothername, nationality])
+	print(table)
+	table.clear()
+	
+def onlineinfo(): # online information
+	print(f"{color.red}\n# Online information{color.end}")
+	table = PrettyTable([f"{color.soft_blue}EMAIL","USERNAME", f"PASSWORD{color.end}"])
+
+	for i in range(args.number):
+		table.add_row([f"{name}123@gmail.com", f"{name}21", "passwd5641$$$"])
+	print(table)
 
 # main
 def main():
+	# excute functions
+	name_gen(args.gender)
+	
 	if args.version: print(version)                         #show the tool version
 	if args.commands == 1: print(commands)                  #checking for -c
-	elif args.commands == 2: print('character')       
+	elif args.commands == 2: print('character')
+	if args.bankinfo:
+		
+		pass
 
 	if args.all:   #show all data
-		#declare vars
-		p_gender = None
-		p_nationality = None
-		p_number = None
 
-		print('CHOOSE THE GENDER:')		#puppet gender
-		print('1) Male')
-		print('2) Female')
-		print('3) Random')
-		p_gender=int(input('>>> '))
-		while p_gender != 1 and p_gender != 2 and p_gender != 3:
-			print('\nCHOIES NOT VALIDE!!!')
-			p_gender=int(input('>>> '))  	
-		
+		# CHARACTER INFORMATION
+		charinfo()
+		onlineinfo()
 
-		print('\nENTER PUPPET NATIONALITY:')    #puppet nationality
-		print('1) American')
-		print('2) Russian')
-		print('3) Arabic')
-		print('4) random')
-		p_nationality= int(input('>>> '))		#puppet nationality
-		while p_nationality != 1 and p_nationality != 2 and p_nationality != 3 and p_nationality != 4:
-			print('\nCHOIES NOT VALIDE!!!')
-			p_nationality=int(input('>>> ')) 
-
-		print('\nENTER THE NUMBER OF RECORDS (DEFAULT IS ONE):')  #record number #goint to remove these options of record and keep just the optional arg -n the user can use it just if he wants to, default value is one
-		p_number= int(input('>>> '))
-		while p_number > 10:
-			print('THE MAX VALUE IS 10!!! TRY LESS NUMBER')
-			p_number= int(input('>>> '))
-		else:
-			print('cool')
-			pass
-		
 		# name generator
 	if args.online: print('online')
 	if args.bankinfo: print('bankinfo')
-	if args.number: print('number')
+	if args.number: print()
 
-	for i in range(args.number):
-			full_name = name_gen(p_gender)
-			mother_name = ''
-			age = '20'
-			gender = rgender
-			nationality = ''
-			country = ''
-			geo_coordinates = ''
-			statu = 'worder'
-			occupation = '' #if worker
-			company = ''
-			salary = ''
-			major = ''  #if student
-			emia = ''
-			phone = ''
-			master_card = '' #bank
-			expires = ''
-			cvc2 = ''
-			birthday = ''  #birthday
-			age = ''
-			zodiac = ''
-			username = '' #onlie
-			email_adress = '' 
-			password = ''
-			ipv4 = ''
-			mac_adress = ''
-			eye_color = '' #physical characterestics
-			hair = 'style(cyrly or not, short long medium) and color'
-			height = ''
-			weith = ''
-			blood_typ = ''
-			fav_color = ''  #personality , favorite color
-			fav_food = ''
-			fav_drink = ''
-			fav_sport = ''
-			fav_film = ''
-			fav_music = '???'
-			hobies = ''
-			interestes = ''
-			viechle = '' #others
-
-	print(full_name, rgender)
-
+	# print data
 
 	# data created successfully
-	print('\n\n[+] Data created successfully!')
+	print(f'{color.green}\n\n[+] Data created successfully!\n{color.end}')
 
 #banner
 def banner():
-	print("""
+	print(f"""{color.pink}
     _____     _        ____                                  ____            
    |  ___|_ _| | _____|  _ \ ___ _ __ ___  ___  _ __   __ _ / ___| ___ _ __  
    | |_ / _` | |/ / _ \ |_) / _ \ '__/ __|/ _ \| '_ \ / _` | |  _ / _ \ '_ \ 
    |  _| (_| |   <  __/  __/  __/ |  \__ \ (_) | | | | (_| | |_| |  __/ | | |
-   |_|  \__,_|_|\_\___|_|   \___|_|  |___/\___/|_| |_|\__,_|\____|\___|_| |_|
+   |_|  \__,_|_|\_\___|_|   \___|_|  |___/\___/|_| |_|\__,_|\____|\___|_| |_|{color.end}
                                                                                 
-________________________________by @ArturDev00________________________________    
+________________________________{color.pink}by @ArturDev00{color.end}________________________________    
 _____________________this man will die, but not his ideas_____________________                
 
 """)

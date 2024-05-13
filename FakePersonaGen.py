@@ -2,6 +2,7 @@ import argparse as parse
 from prettytable import PrettyTable 
 import random
 import textStyle
+import datetime
 
 
 #inisialize
@@ -9,7 +10,7 @@ color = textStyle.TextColor
 
 # Declare Variables
 version='0.1.0'
-commands="-v --version : tool version\n-c --commands : show all commands\n-g --gender : choose puppet gender\n-cc --character : generate just character info(name, age, birthday, etc)\n-n --number : number of the puppets\n-a --all : generate all info\n-o --online : generate online info (email, username, password, IPV4, mac adress, etc)\n-b --bankinfo : generate bank information"
+commands="-v --version : tool version\n-g --gender : choose puppet gender\n-c --character : generate just character info(name, age, birthday, etc)\n-n --number : number of the puppets\n-a --all : generate all info\n-o --online : generate online info (email, username, password, IPV4, mac adress, etc)\n-b --bankinfo : generate bank information\n--birthday : generate a birthday information (age, year, month, day, zodiac, etc)"
 name = surename = mothername = rgender = age = birthday = zodiac  = nationality = geo_coordinates = statue = accupation = company = salary = major = mastercard = expired = cvc2 = username = email = phone = password = ipv4 = mac_adress = eye_color = hair = height = weight = bloodtype = fav_color = fav_food = fav_drink = fav_film = fav_sport = fav_music = hobies = interestes = viechle = None 
 
 # Create an ArgumentParser object
@@ -17,13 +18,14 @@ parser = parse.ArgumentParser(description=" Generate a Fake Persona for SUCK PUP
 
 # Define optional arguments 
 parser.add_argument('-v', '--version', help='tool version', action='store_true')
-parser.add_argument('-c', '--commands', help='show all commands', action='count') # if it's -c it will show commands, if it's -cc it will generate character (name, age ...)
+parser.add_argument('-c', '--character', help='generate just character info(name, age, birthday, etc)', action="store_true")
 parser.add_argument('-g', '--gender', help='choose the gender of your puppet', choices={'m', 'f', 'r', 'male', 'female','random'}, default='random')
 parser.add_argument('-n', '--number', help='number of puppets', type=int, default=1)
 parser.add_argument('--nationality', help='choose the puppet\'s nationality', choices={'american', 'russian'}, default='american')
 parser.add_argument('-a', '--all', help='generate all information', action='store_true')
 parser.add_argument('-o', '--online', help='generate online information (email, username, password, IPV4, mac adress, etc)', action='store_true')
 parser.add_argument('-b', '--bankinfo', help='generate bank information', action='store_true')
+parser.add_argument('--birthday', help='generate (birthday, age, zodiac, etc ..', action='store_true')
 
 
 # Parse Arguments
@@ -31,7 +33,7 @@ args = parser.parse_args()
 
 # Generating Functions
 # name
-def name_gen(gender = 3): # generate puppet name
+def name_gen(gender = 'r'): # generate puppet name
 	global rgender
 	global name 
 	global surename 
@@ -67,19 +69,45 @@ def name_gen(gender = 3): # generate puppet name
 
 
 def age():
+	today = datetime.date.today()
 	#TODO: get age --age : and calculate and generate the birthday
 	#TODO: generate a random age and birthday
- 
+	months = {1:'January', 2:'February', 3:'March', 4:'April', 5:'May', 6:'June', 7:'July', 8:'August', 9:'September', 10:'October', 11:'November', 12:'December'}
 	
-	pass
+	print(f"{color.red}\n# Birthday information{color.end}")
+	table = PrettyTable([f"{color.soft_blue}Age", "Birthday Year", "Month", "Day", f"Zodiac{color.end}"])
+
+	for i in range(args.number):
+		year = random.randint(1980, today.year -14)
+		month_randint = random.randint(1, len(months))
+		month = months[month_randint]
+		day = random.randint(1, 28)
+		age = today.year - year - ((today.month, today.day) <= (month_randint, day))
+		table.add_row([age, year, month, day, 'comming'])
+	
+	print(table)
+ 
 
 # email
-def email():
-	global username
-	global password
+def email(): # generate an email address
+
 	email = ['gmail', 'yahoo', 'yandex', 'outlook', 'hotmail', 'protonmail']
-	extention = ['html', 'ru', 'com']
+	extention = ['ru', 'com']
 	return str(name).lower() + '.' + str(surename).lower() + '@' + (email[random.randint(0, len(email)-1)]) + '.' + (extention[random.randint(0, len(extention)-1)])
+
+# password
+def passwd(): # generate a random password
+	password = "\0"
+	allchars = [['*', '_', '\\', '/', '$', '%', '&', '~', '!', '#', '<', '>'], 
+			   ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
+			   ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
+			   [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]]	
+	
+	for i in range(12):
+		col = random.randint(0, len(allchars) - 1)
+		password += str(allchars[col][random.randint(0, len(allchars[col]) - 1)])
+	#return
+	return password
 
 
 # Optional functions
@@ -95,36 +123,34 @@ def charinfo(): # character information
 	
 def onlineinfo(): # online information
 	print(f"{color.red}\n# Online information{color.end}")
-	table = PrettyTable([f"{color.soft_blue}EMAIL","USERNAME", f"PASSWORD{color.end}"])
+	table = PrettyTable([f"{color.soft_blue}EMAIL","USERNAME",f"PASSWORD{color.end}"])
 
 	for i in range(args.number):
-		table.add_row([f"{name}123@gmail.com", f"{name}21", "passwd5641$$$"])
+		table.add_row([email(), f"{name}{random.randint(100,999)}", passwd()])
 	print(table)
 
 # main
 def main():
 	# excute functions
 	name_gen(args.gender)
-	
-	if args.version: print(version)                         #show the tool version
-	if args.commands == 1: print(commands)                  #checking for -c
-	elif args.commands == 2: print('character')
-	if args.bankinfo:
-		
-		pass
+	passwd()
+	# show help 
+	print(f"{color.red}# Commands\n{color.end}{commands}\n")
+	if args.version: print(f"TOOL VERSION : {version} v")                         #show the tool version
+	if args.character:	charinfo()
+	if args.bankinfo:	pass								#bank information
+	if args.online: onlineinfo()
+	if args.bankinfo: print('bankinfo')
+	if args.number: print()
+	if args.birthday: age()
 
+	#TODO: advice to get a good sock puppet (web sites and others)  -aa --advice
 	if args.all:   #show all data
 
 		# CHARACTER INFORMATION
 		charinfo()
+		age()
 		onlineinfo()
-
-		# name generator
-	if args.online: print('online')
-	if args.bankinfo: print('bankinfo')
-	if args.number: print()
-
-	# print data
 
 	# data created successfully
 	print(f'{color.green}\n\n[+] Data created successfully!\n{color.end}')

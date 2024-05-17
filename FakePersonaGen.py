@@ -12,6 +12,8 @@ color = textStyle.TextColor
 version='0.1.0'
 commands="-v --version : tool version\n-g --gender : choose puppet gender\n-c --character : generate just character info(name, age, birthday, etc)\n-n --number : number of the puppets\n-a --all : generate all info\n-o --online : generate online info (email, username, password, IPV4, mac adress, etc)\n-b --bankinfo : generate bank information\n--birthday : generate a birthday information (age, year, month, day, zodiac, etc)"
 name = surename = mothername = rgender = age = birthday = zodiac  = nationality = geo_coordinates = statue = accupation = company = salary = major = mastercard = expired = cvc2 = username = email = phone = password = ipv4 = mac_adress = eye_color = hair = height = weight = bloodtype = fav_color = fav_food = fav_drink = fav_film = fav_sport = fav_music = hobies = interestes = viechle = None 
+names_array = []
+surenames_array = []
 
 # Create an ArgumentParser object
 parser = parse.ArgumentParser(description=" Generate a Fake Persona for SUCK PUPPET")
@@ -109,25 +111,34 @@ def passwd(): # generate a random password
 	#return
 	return password
 
-
 # Optional functions
-def charinfo(): # character information
+
+# character information
+def charinfo():
 	print(f"{color.red}# Character information{color.end}")
-	table = PrettyTable([f"{color.soft_blue}NAME", "SURENAME", "MOTHER NAME", f"NATIONALITY{color.end}"])
+	table = PrettyTable([f"{color.soft_blue}NAME", "SURENAME", "MOTHER NAME", "GENDER", f"NATIONALITY{color.end}"])
+	names_array.clear()
 
 	for i in range(args.number):
 		name_gen(args.gender)
-		table.add_row([name, surename, mothername, nationality])
+		names_array.insert(i, name)
+		surenames_array.insert(i, surename)
+		table.add_row([name, surename, mothername, rgender, nationality])
 	print(table)
 	table.clear()
 	
-def onlineinfo(): # online information
+# online information
+def onlineinfo(): 
+	global name, surename
 	print(f"{color.red}\n# Online information{color.end}")
 	table = PrettyTable([f"{color.soft_blue}EMAIL","USERNAME",f"PASSWORD{color.end}"])
 
 	for i in range(args.number):
+		name = names_array[i]
+		surename = surenames_array[i]
 		table.add_row([email(), f"{name}{random.randint(100,999)}", passwd()])
 	print(table)
+	names_array.clear()
 
 # main
 def main():
@@ -141,7 +152,6 @@ def main():
 	if args.bankinfo:	pass								#bank information
 	if args.online: onlineinfo()
 	if args.bankinfo: print('bankinfo')
-	if args.number: print()
 	if args.birthday: age()
 
 	#TODO: advice to get a good sock puppet (web sites and others)  -aa --advice

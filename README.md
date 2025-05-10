@@ -3,8 +3,8 @@ Generate a random Persona profiles with realistic names, addresses, and other de
 
 
 ## Project Notes
-###-v, --version  ==>  tool version
-###-g, --gender  ==> choose the gender of your puppet
+### -v, --version  ==>  tool version
+### -g, --gender  ==> choose the gender of your puppet
 -n, --number  ==>  number of puppets
 --nationality  ==>  choose the puppet's nationality
 -a, --all  ==> generate all information

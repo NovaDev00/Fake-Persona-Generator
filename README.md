@@ -11,3 +11,5 @@ Generate a random Persona profiles with realistic names, addresses, and other de
 ######  -b--bankinfo   ==>  generate bank information (in development)
 ######  --birthday     ==>  generate (birthday, age, zodiac, etc .. (in development)
 ######  -a, --all      ==> generate all the previous information 
+
+pip install prettytable

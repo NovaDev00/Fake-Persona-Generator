@@ -58,10 +58,5 @@ This tool is provided for educational and legitimate security testing purposes o
 
 Contributions are welcome! Please read our contributing guidelines and ensure all contributions align with ethical use principles.
 
-## 📄 License
-
-[Your chosen license here]
-
----
 
 **Remember**: Always use responsibly and respect privacy rights.

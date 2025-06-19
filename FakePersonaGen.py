@@ -9,7 +9,7 @@ import datetime
 color = textStyle.TextColor
 
 # Declare Variables
-version='0.1.0'
+version='0.1.2'
 commands="-v --version : tool version\n-g --gender : choose puppet gender\n-c --character : generate just character info(name, age, birthday, etc)\n-n --number : number of the puppets\n-a --all : generate all info\n-o --online : generate online info (email, username, password, IPV4, mac adress, etc)\n-b --bankinfo : generate bank information\n--birthday : generate a birthday information (age, year, month, day, zodiac, etc)"
 name = surename = mothername = rgender = age = birthday = zodiac  = nationality = geo_coordinates = statue = accupation = company = salary = major = mastercard = expired = cvc2 = username = email = phone = password = ipv4 = mac_adress = eye_color = hair = height = weight = bloodtype = fav_color = fav_food = fav_drink = fav_film = fav_sport = fav_music = hobies = interestes = viechle = None 
 names_array = []
@@ -28,12 +28,12 @@ parser.add_argument('-a', '--all', help='generate all information', action='stor
 parser.add_argument('-o', '--online', help='generate online information (email, username, password, IPV4, mac adress, etc)', action='store_true')
 parser.add_argument('-b', '--bankinfo', help='generate bank information', action='store_true')
 parser.add_argument('--birthday', help='generate (birthday, age, zodiac, etc ..', action='store_true')
-
+parser.add_argument('-l', '--location', help='generate random location', choices={'russian', 'american','random'}, default='random')
 
 # Parse Arguments
 args = parser.parse_args()
 
-# Generating Functions
+### Generating Functions ###
 # name
 def name_gen(gender = 'r'): # generate puppet name
 	global rgender
@@ -86,7 +86,7 @@ def age():
 		day = random.randint(1, 28)
 		age = today.year - year - ((today.month, today.day) <= (month_randint, day))
 		table.add_row([age, year, month, day, 'comming'])
-	
+
 	print(table)
  
 
@@ -111,6 +111,81 @@ def passwd(): # generate a random password
 	#return
 	return password
 
+# locations
+def location_gen():
+	pass
+# russian locations
+def russian_location_gen():
+	russian_locations_data = {
+		"Moscow Oblast" : {
+			"Moscow" : [
+				"Arbat Street", "Tverskaya Street", "Pyatnitskaya Street", "Myasnitskaya Street", "Bolshaya Nikitskaya Street", "Novy Arbat Street",
+				"Bolshaya Dmitrovka Street", "Kuznetsky Most", "Lubyanka Street", "Altuf'yevskoye Shosse", "Altufyevskoye Highway", "Leninsky Prospekt"
+			],
+			"Balashikha" : [
+				"67 Prospekt Lenina", "6 Polevoy Proyezd", "Zheleznodorozhny", "13 Severnyy Proyezd", "13 Severnyy Proyezd", "31 Ulitsa Zarechnaya", "43 Ulitsa Sverdlova"
+			],
+			"Podolsk" : [
+				"Lenina Street", "Oktyabrskaya Street", "Kirova Street", "Sovetskaya Street", "Pervomayskaya Street"
+			],
+			"Khimki" : [
+				"Babakina Street", "Ulitsa Druzhby", "Leningradskaya Street", "Pobedy Street", "Geroyev Panfilovtsev Street"
+			],
+			"Korolev" : [
+				"Lenina Street", "Gagarina Street", "Korolyova Avenue", "Kalinina Street", "Tsiolkovskogo Street"
+			],
+			"Mytishchi" : [
+				"Yaroslavl Highway", "Pionerskaya Street", "1st Institutskaya Street", "Mira Street", "Kommunisticheskaya Street"
+			],
+			"Zheleznodorozhny" : [
+				"9 Ulitsa Oktyabr'skaya", "Ulitsa Nekrasova"
+			]
+		},
+		"Republic of Bashkortostan" : {
+			"Ufa" : [
+				"Oktyabrya Avenue", "Lenina Street", "Chernyshevskogo Street", "Zaki Validi Street", "Kirova Street", "Gogolya Street", "Karl Marx Street", "Dostoyevskogo Street", "Revolyutsionnaya Street", "Mendeleyeva Street", "Prospekt Salavata Yulayeva", "Kommunisticheskaya Street", "Pushkina Street", "Bakunina Street", "Pervomayskaya Street", "Kosmonavtov Street"
+			],
+			"Sterlitamak" : [
+				"Oktyabrya Avenue", "Kommunisticheskaya Street", "Mira Street", "Artyoma Street", "Khalturina Street", "Gagarin Boulevard", "Druzhby Street", "Golovanova Street"
+			], 
+			"Salavat" : [
+				"Oktyabrya Street", "Lenina Street", "Kalinina Street", "Pervomayskaya Street", "Gagarin Street", "Molodyozhnaya Street", "Bikbulatova Street"
+			], 
+			"Neftekamsk" : [
+				"Lenina Avenue", "Komsomolskaya Street", "Yubileynaya Street", "Stroitelykh Street", "Mira Street", "Energetikov Street", "Traktovaya Street"
+			],
+			"Oktyabrsky" : [
+				"Lenina Avenue", "Devonskaya Street", "Komsomolskaya Street", "Pushkina Street", "Gagarina Street", "Chapayeva Street", "Stroitelnaya Street"
+			]
+		}	
+	}
+	
+	# make a table
+	print(f"{color.red}\n#Location data{color.end}")
+	table = PrettyTable([f"{color.soft_blue}Federal subject", "City", f"Street{color.end}"])
+
+	# Generate random russian location
+	for i in range(args.number):
+		# Random Federal Subject
+		Federal_subjects = list(russian_locations_data.keys())
+		selected_subject = random.choice(Federal_subjects)
+
+		# Random Citi in subject
+		cities_in_subject = russian_locations_data[selected_subject]
+		cities_names = list(cities_in_subject.keys())
+		selected_city = random.choice(cities_names)
+
+		# Random Street in city
+		street_in_city = cities_in_subject[selected_city]
+		selected_street = random.choice(street_in_city)
+
+		# add a table row information
+		table.add_row([selected_subject, selected_city, selected_street])
+
+	print(table)
+	table.clear()
+
+
 # Optional functions
 
 # character information
@@ -121,8 +196,8 @@ def charinfo():
 
 	for i in range(args.number):
 		name_gen(args.gender)
-		names_array.insert(i, name)
-		surenames_array.insert(i, surename)
+		names_array.insert(i-1, name)
+		surenames_array.insert(i-1, surename)
 		table.add_row([name, surename, mothername, rgender, nationality])
 	print(table)
 	table.clear()
@@ -145,14 +220,20 @@ def main():
 	# excute functions
 	name_gen(args.gender)
 	passwd()
+	
 	# show help 
 	print(f"{color.red}# Commands\n{color.end}{commands}\n")
+	# loading 
+	if args.number > 100000:
+		print(f'{color.green}\n[+] Loading... \n{color.end}')
+	#
 	if args.version: print(f"TOOL VERSION : {version} v")                         #show the tool version
 	if args.character:	charinfo()
 	if args.bankinfo:	pass								#bank information
 	if args.online: onlineinfo()
 	if args.bankinfo: print('bankinfo')
 	if args.birthday: age()
+	if args.location: russian_location_gen()
 
 	#TODO: advice to get a good sock puppet (web sites and others)  -aa --advice
 	if args.all:   #show all data
@@ -161,6 +242,7 @@ def main():
 		charinfo()
 		age()
 		onlineinfo()
+		russian_location_gen()
 
 	# data created successfully
 	print(f'{color.green}\n\n[+] Data created successfully!\n{color.end}')
@@ -169,10 +251,10 @@ def main():
 def banner():
 	print(f"""{color.pink}
     _____     _        ____                                  ____            
-   |  ___|_ _| | _____|  _ \ ___ _ __ ___  ___  _ __   __ _ / ___| ___ _ __  
-   | |_ / _` | |/ / _ \ |_) / _ \ '__/ __|/ _ \| '_ \ / _` | |  _ / _ \ '_ \ 
-   |  _| (_| |   <  __/  __/  __/ |  \__ \ (_) | | | | (_| | |_| |  __/ | | |
-   |_|  \__,_|_|\_\___|_|   \___|_|  |___/\___/|_| |_|\__,_|\____|\___|_| |_|{color.end}
+   |  ___|_ _| | _____|  _ \\ ___ _ __ ___  ___  _ __   __ _ / ___| ___ _ __  
+   | |_ / _` | |/ / _ \\ |_) / _ \\ '__/ __|/ _ \\| '_ \\ / _` | |  _ / _ \\ '_ \\ 
+   |  _| (_| |   <  __/  __/  __/ |  \\__ \\ (_) | | | | (_| | |_| |  __/ | | |
+   |_|  \\__,_|_|\\_\\___|_|   \\___|_|  |___/\\___/|_| |_|\\__,_|\\____|\\___|_| |_|{color.end}
                                                                                 
 ________________________________{color.pink}by @ArturDev00{color.end}________________________________    
 _____________________this man will die, but not his ideas_____________________                

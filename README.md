@@ -36,16 +36,25 @@ This tool generates fake but realistic personal data to help users:
 
 ```bash
 git clone https://github.com/yourusername/privacy-data-generator
-cd privacy-data-generator
-pip install -r requirements.txt
+cd //download folder
+pip install python
 ```
 
 ## 🚀 Usage
 
-```bash
-python generator.py [options]
+```bash (help)
+py FakePersonaGen.py
 ```
-
+``` all informatio
+py FakePersonaGen.py -a
+or
+py FakePersonaGen.py --all
+```
+``` all informatio (multi data)
+py FakePersonaGen.py -a --number 10
+or
+py FakePersonaGen.py -a -n 10
+```
 See documentation for detailed usage examples.
 
 ## ⚖️ Legal Disclaimer

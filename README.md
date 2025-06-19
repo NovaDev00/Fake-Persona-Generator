@@ -30,8 +30,7 @@ This tool generates fake but realistic personal data to help users:
 
 ## 🐍 Requirements
 
-- Python 3.6+
-- See `requirements.txt` for dependencies
+- Python 3.x+
 
 ## 📦 Installation
 

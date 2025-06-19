@@ -10,7 +10,7 @@ color = textStyle.TextColor
 
 # Declare Variables
 version='0.1.2'
-commands="-v --version : tool version\n-g --gender : choose puppet gender\n-c --character : generate just character info(name, age, birthday, etc)\n-n --number : number of the puppets\n-a --all : generate all info\n-o --online : generate online info (email, username, password, IPV4, mac adress, etc)\n-b --bankinfo : generate bank information\n--birthday : generate a birthday information (age, year, month, day, zodiac, etc)"
+commands="-v --version : tool version\n-a --all : generate all info\n-g --gender : choose puppet gender\n-c --character : generate just character info(name, age, birthday, etc)\n-n --number : number of the puppets\n-o --online : generate online info (email, username, password, IPV4, mac adress, etc)\n-b --bankinfo : generate bank information\n--birthday : generate a birthday information (age, year, month, day, zodiac, etc)"
 name = surename = mothername = rgender = age = birthday = zodiac  = nationality = geo_coordinates = statue = accupation = company = salary = major = mastercard = expired = cvc2 = username = email = phone = password = ipv4 = mac_adress = eye_color = hair = height = weight = bloodtype = fav_color = fav_food = fav_drink = fav_film = fav_sport = fav_music = hobies = interestes = viechle = None 
 names_array = []
 surenames_array = []
@@ -28,7 +28,7 @@ parser.add_argument('-a', '--all', help='generate all information', action='stor
 parser.add_argument('-o', '--online', help='generate online information (email, username, password, IPV4, mac adress, etc)', action='store_true')
 parser.add_argument('-b', '--bankinfo', help='generate bank information', action='store_true')
 parser.add_argument('--birthday', help='generate (birthday, age, zodiac, etc ..', action='store_true')
-parser.add_argument('-l', '--location', help='generate random location', choices={'russian', 'american','random'}, default='random')
+parser.add_argument('-l', '--location', help='generate random location', choices={'russia', 'usa','random'}, default='random')
 
 # Parse Arguments
 args = parser.parse_args()
@@ -113,7 +113,7 @@ def passwd(): # generate a random password
 
 # locations
 def location_gen():
-	pass
+	russian_location_gen()
 # russian locations
 def russian_location_gen():
 	russian_locations_data = {
@@ -224,16 +224,14 @@ def main():
 	# show help 
 	print(f"{color.red}# Commands\n{color.end}{commands}\n")
 	# loading 
-	if args.number > 100000:
+	if args.number >= 100000:
 		print(f'{color.green}\n[+] Loading... \n{color.end}')
 	#
-	if args.version: print(f"TOOL VERSION : {version} v")                         #show the tool version
 	if args.character:	charinfo()
-	if args.bankinfo:	pass								#bank information
+	if args.bankinfo:	pass			#bank information
 	if args.online: onlineinfo()
 	if args.bankinfo: print('bankinfo')
 	if args.birthday: age()
-	if args.location: russian_location_gen()
 
 	#TODO: advice to get a good sock puppet (web sites and others)  -aa --advice
 	if args.all:   #show all data
@@ -242,7 +240,7 @@ def main():
 		charinfo()
 		age()
 		onlineinfo()
-		russian_location_gen()
+		location_gen()
 
 	# data created successfully
 	print(f'{color.green}\n\n[+] Data created successfully!\n{color.end}')
@@ -256,7 +254,7 @@ def banner():
    |  _| (_| |   <  __/  __/  __/ |  \\__ \\ (_) | | | | (_| | |_| |  __/ | | |
    |_|  \\__,_|_|\\_\\___|_|   \\___|_|  |___/\\___/|_| |_|\\__,_|\\____|\\___|_| |_|{color.end}
                                                                                 
-________________________________{color.pink}by @ArturDev00{color.end}________________________________    
+________________________________{color.pink}by @NovaCode00{color.end}________________________________    
 _____________________this man will die, but not his ideas_____________________                
 
 """)
@@ -264,8 +262,10 @@ _____________________this man will die, but not his ideas_____________________
 
 # start program
 if __name__ == '__main__':
-	banner()
-	main()
+	if args.version: print(f"Fake Persona Generator VERSION : {version} v")              #show the tool version
+	else: 
+		banner() 
+		main()
 
 
 

@@ -22,7 +22,7 @@ parser = parse.ArgumentParser(description=" Generate a Fake Persona for SUCK PUP
 parser.add_argument('-v', '--version', help='tool version', action='store_true')
 parser.add_argument('-c', '--character', help='generate just character info(name, age, birthday, etc)', action="store_true")
 parser.add_argument('-g', '--gender', help='choose the gender of your puppet', choices={'m', 'f', 'r', 'male', 'female','random'}, default='random')
-parser.add_argument('-n', '--number', help='number of puppets', type=int, default=1)
+parser.add_argument('-n', '--number', help='number of puppets (ex: py FakePersonaGen.py -a -n 3)', type=int, default=1)
 parser.add_argument('--nationality', help='choose the puppet\'s nationality', choices={'american', 'russian'}, default='american')
 parser.add_argument('-a', '--all', help='generate all information', action='store_true')
 parser.add_argument('-o', '--online', help='generate online information (email, username, password, IPV4, mac adress, etc)', action='store_true')

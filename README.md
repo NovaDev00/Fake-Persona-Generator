@@ -45,23 +45,10 @@ pip install python
 ```bash (help)
 py FakePersonaGen.py
 ```
-all informatio
-``` 
-py FakePersonaGen.py -a
+use -h or --help for detailed usage examples.
 ```
-or
+py FakePersonaGen.py -h
 ```
-py FakePersonaGen.py --all
-```
-all informatio (multi data)
-``` 
-py FakePersonaGen.py -a --number 10
-```
-or
-```
-py FakePersonaGen.py -a -n 10
-```
-See documentation for detailed usage examples.
 
 ## ⚖️ Legal Disclaimer
 

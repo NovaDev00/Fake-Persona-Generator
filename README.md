@@ -45,14 +45,20 @@ pip install python
 ```bash (help)
 py FakePersonaGen.py
 ```
-``` all informatio
+all informatio
+``` 
 py FakePersonaGen.py -a
+```
 or
+```
 py FakePersonaGen.py --all
 ```
-``` all informatio (multi data)
+all informatio (multi data)
+``` 
 py FakePersonaGen.py -a --number 10
+```
 or
+```
 py FakePersonaGen.py -a -n 10
 ```
 See documentation for detailed usage examples.

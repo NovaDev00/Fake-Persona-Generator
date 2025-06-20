@@ -45,7 +45,7 @@ pip install python
 ```bash (help)
 py FakePersonaGen.py
 ```
-use -h or --help for detailed usage examples.
+or
 ```
 py FakePersonaGen.py -h
 ```

@@ -10,7 +10,8 @@ color = textStyle.TextColor
 
 # Declare Variables
 version='0.1.2'
-commands="-v --version : tool version\n-a --all : generate all info\n-g --gender : choose puppet gender\n-c --character : generate just character info(name, age, birthday, etc)\n-n --number : number of the puppets\n-o --online : generate online info (email, username, password, IPV4, mac adress, etc)\n-b --bankinfo : generate bank information\n--birthday : generate a birthday information (age, year, month, day, zodiac, etc)"
+commands=f"{color.light_blue}-v --version {color.end}: tool version\n{color.light_blue}-h2 --how2use {color.end}: show some examples\n{color.light_blue}-a --all {color.end}: generate all info\n{color.light_blue}-g --gender {color.end}: choose puppet gender (-g female or -g male), Default is random\n{color.light_blue}-c --character {color.end}: generate just character info(name, age, birthday, etc)\n{color.light_blue}-n --number {color.end}: number of the puppets (-n 3)\n{color.light_blue}-o --online {color.end}: generate online info (email, username, password, IPV4, mac adress, etc) (in developpment)\n{color.light_blue}-b --bankinfo {color.end}: generate bank information (coming soon)\n{color.light_blue}--birthday {color.end}: generate a birthday information (age, year, month, day, zodiac, etc)"
+how_to_use=f"{color.light_blue}Generate all info: {color.end}{color.yellow}py FakePersonaGen.py -a{color.end}\n{color.light_blue}Generate multi info: {color.end}{color.yellow}py FakePersonaGen.py -a -n 10 {color.end} \n{color.light_blue}Generate 5 info of male only: {color.end}{color.yellow}py FakePersonaGen.py -a -n 5 -g male{color.end}\n"
 name = surename = mothername = rgender = age = birthday = zodiac  = nationality = geo_coordinates = statue = accupation = company = salary = major = mastercard = expired = cvc2 = username = email = phone = password = ipv4 = mac_adress = eye_color = hair = height = weight = bloodtype = fav_color = fav_food = fav_drink = fav_film = fav_sport = fav_music = hobies = interestes = viechle = None 
 names_array = []
 surenames_array = []
@@ -20,7 +21,8 @@ parser = parse.ArgumentParser(description=" Generate a Fake Persona for SUCK PUP
 
 # Define optional arguments 
 parser.add_argument('-v', '--version', help='tool version', action='store_true')
-parser.add_argument('-c', '--character', help='generate just character info(name, age, birthday, etc)', action="store_true")
+parser.add_argument('-h2', '--how2use', help='show some examples', action='store_true')
+parser.add_argument('-c', '--character', help='generate just character info(name, age, birthday, etc)', action='store_true')
 parser.add_argument('-g', '--gender', help='choose the gender of your puppet', choices={'m', 'f', 'r', 'male', 'female','random'}, default='random')
 parser.add_argument('-n', '--number', help='number of puppets (ex: py FakePersonaGen.py -a -n 3)', type=int, default=1)
 parser.add_argument('--nationality', help='choose the puppet\'s nationality', choices={'american', 'russian'}, default='american')
@@ -106,8 +108,8 @@ def passwd(): # generate a random password
 			   [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]]	
 	
 	for i in range(12):
-		col = random.randint(0, len(allchars) - 1)
-		password += str(allchars[col][random.randint(0, len(allchars[col]) - 1)])
+		row = random.randint(0, len(allchars) - 1)
+		password += str(allchars[row][random.randint(0, len(allchars[row]) - 1)])
 	#return
 	return password
 
@@ -232,6 +234,7 @@ def main():
 	if args.online: onlineinfo()
 	if args.bankinfo: print('bankinfo')
 	if args.birthday: age()
+	if args.how2use: print(f"{color.red}# How to use\n{color.end}{how_to_use}")
 
 	#TODO: advice to get a good sock puppet (web sites and others)  -aa --advice
 	if args.all:   #show all data

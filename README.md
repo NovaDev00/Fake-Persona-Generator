@@ -47,11 +47,11 @@ pip install python
 ## 🚀 Usage
 
 ```bash (help)
-py FakePersonaGen.py
+python FakePersonaGen.py
 ```
 or
 ```
-py FakePersonaGen.py -h
+python FakePersonaGen.py -h
 ```
 
 ## ⚖️ Legal Disclaimer

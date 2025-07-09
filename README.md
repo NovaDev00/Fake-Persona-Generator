@@ -33,10 +33,14 @@ This tool generates fake but realistic personal data to help users:
 - Python 3.x+
 
 ## 📦 Installation
-
-```bash
-git clone https://github.com/yourusername/privacy-data-generator
-cd //download folder
+bash
+```Step 1 :
+git clone https://github.com/NovaDev00/Fake-Persona-Generator
+```
+```Step 2 :
+cd (download folder)
+```
+```Step 3 :
 pip install python
 ```
 
